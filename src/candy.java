@@ -1,4 +1,4 @@
-class Solution {
+class candy {
     public int candy(int[] ratings) {
         int length = ratings.length;
         int[] result = new int[length];
