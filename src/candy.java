@@ -11,7 +11,6 @@ class candy {
             else result[i] = 1;
         }
 
-
         //take care of the right neighbors smaller than current
         for (int i = length - 2; i >= 0; i--) {
             if (ratings[i] > ratings[i + 1]) {
