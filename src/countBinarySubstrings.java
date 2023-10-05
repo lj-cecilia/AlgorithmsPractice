@@ -15,3 +15,4 @@ class countBinarySubstrings {
         return count += Math.min(curr, prev);
     }
 }
+
