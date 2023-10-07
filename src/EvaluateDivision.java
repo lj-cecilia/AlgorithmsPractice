@@ -51,6 +51,7 @@ class EvaluateDivision {
         }
     }
 }
+
 /*Make the graph. For every equation a=nba=nba=nb, add two edges a --n--> b and a <--1/n-- b.
 For each query [c,d][c,d][c,d], check if such nodes even exists in the graph or not. If they don't even exist, there is no path, return -1 (Like in Example 1, x does not exists so return -1 even if we just wanted x / x).
 If both ccc and ddd exists in the graph, traverse the graph to get a path between them, maintaining cost of path as product of weights of edges traversed. If path is found return the product, and if not, then -1.*/
