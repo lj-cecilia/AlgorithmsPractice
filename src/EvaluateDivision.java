@@ -43,6 +43,7 @@ class EvaluateDivision {
             ans[0] = temp;
             return;
         }
+
         //what?
         for (Map.Entry<String, Double> entry : map.get(node).entrySet()) {
             String next = entry.getKey();
