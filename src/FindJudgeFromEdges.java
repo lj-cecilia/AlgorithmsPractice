@@ -1,4 +1,5 @@
 class FindJudgeFromEdges {
+
     //goal - find judge
     //judge can trust no one, everyone trusts judge
     public int findJudge(int n, int[][] trust) {
