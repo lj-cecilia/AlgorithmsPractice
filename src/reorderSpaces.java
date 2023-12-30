@@ -24,10 +24,10 @@ class reorderSpaces {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < size; i++) {
             result.append(list.get(i));
-            result.append(" ".repeat(space));
+//            result.append(" ".repeat(space));
         }
         result.append(list.get(list.size() - 1));
-        result.append(" ".repeat(extra));
+//        result.append(" ".repeat(extra));
 
         return result.toString();
     }
