@@ -28,6 +28,6 @@ class MaxAncestorDiff {
         max = Math.max(max, node.val);
         dfs(min, max, node.left);
         dfs(min, max, node.right);
-        
+
     }
 }
