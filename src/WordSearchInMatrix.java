@@ -24,3 +24,4 @@ class WordSearchInMatrix {
         return result;
     }
 }
+
