@@ -1,5 +1,8 @@
-//import javax.swing.tree.TreeNode;
 import java.util.Stack;
+/*
+SC O(h)
+TC O(1) amortized
+*/
 
 /**
  * Definition for a binary tree node.
@@ -16,42 +19,43 @@ import java.util.Stack;
  *     }
  * }
  */
-
-
-
 class BSTIterator {
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode() {}
-        TreeNode(int val) { this.val = val; }
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-    TreeNode node;
+     public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
     Stack<TreeNode> stack;
+
     public BSTIterator(TreeNode root) {
-        node = root;
         stack = new Stack<>();
+        addAll(root);
     }
 
     public int next() {
-        while (node != null) {
-            stack.push(node);
-            node = node.left;
-        }
-        node = stack.pop();
-        int result = node.val;
-        node = node.right;
-        return result;
+        TreeNode node = stack.pop();
+        //add all the left of its right to the stack
+        addAll(node.right);
+        return node.val;
     }
 
     public boolean hasNext() {
         return !stack.isEmpty();
+    }
+
+    public void addAll(TreeNode root) {
+        while (root != null) {
+            stack.add(root);
+            root = root.left;
+        }
+        return;
     }
 }
 
