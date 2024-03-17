@@ -1,3 +1,5 @@
+//time O(n)
+//space O(n)
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,41 @@ class InsertInterval {
             i++;
         }
 
-        return l.toArray(new int[l.size()][]);
+        return l.toArray(new int[l.size()][2]);
     }
 }
+
+//time O(n)
+//space O(n)
+//class Solution {
+//    public int[][] insert(int[][] intervals, int[] newInterval) {
+//        List<int[]> list = new ArrayList<>();
+//        int start = newInterval[0];
+//        int end = newInterval[1];
+//
+//        for (int[] interval : intervals) {
+//            int curStart = interval[0];
+//            int curEnd = interval[1];
+//
+//            //completely smaller than interval
+//            if (curEnd < start) list.add(new int[] {curStart, curEnd});
+//
+//                //completely larger than interval, add interval and replace the start and end
+//            else if (curStart > end) {
+//                list.add(new int[] {start, end});
+//                start = curStart;
+//                end = curEnd;
+//            }
+//
+//            //lie in between, update the start and end
+//            else {
+//                start = Math.min(start, curStart);
+//                end = Math.max(end, curEnd);
+//            }
+//        }
+//
+//        list.add(new int[] {start, end});
+//
+//        return list.toArray(new int[list.size()][2]);
+//    }
+//}
