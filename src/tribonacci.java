@@ -14,3 +14,26 @@ class tribonacci {
         return fb[n];
     }
 }
+
+//time O(n)
+//space O(1)
+//class tribonacci {
+//    public int tribonacci(int n) {
+//        if (n < 3) {
+//            if (n == 0) return 0;
+//            return 1;
+//        }
+//
+//        int result = 0;
+//        int first = 0, second = 1, third = 1;
+//
+//        for (int i = 3; i <= n; i++) {
+//            result = first + second + third;
+//            first = second;
+//            second = third;
+//            third = result;
+//        }
+//
+//        return result;
+//    }
+//}
