@@ -1,10 +1,9 @@
 //time O(nlongn)
 //space O(n)
+//sort and two pointers
 
 
 import java.util.Arrays;
-
-//sort and two pointers
 class successfulPairs {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
         int[] result = new int[spells.length];
