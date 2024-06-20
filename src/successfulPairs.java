@@ -2,7 +2,6 @@
 //space O(n)
 //sort and two pointers
 
-
 import java.util.Arrays;
 class successfulPairs {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
