@@ -1,3 +1,5 @@
+//time O(n)
+//space O(1)
 class MaxAverageSubarray {
     public double findMaxAverage(int[] nums, int k) {
         double total = 0;
