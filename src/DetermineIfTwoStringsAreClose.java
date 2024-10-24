@@ -1,5 +1,5 @@
-////time O(n) since the sorting is done with size 26 array it's O(1)
-////space O(1) for the size 26 array
+//time O(n) since the sorting is done with size 26 array it's O(1)
+//space O(1) for the size 26 array
 //
 //import java.util.Arrays;
 //
