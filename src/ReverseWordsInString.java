@@ -1,4 +1,3 @@
-
 //time O(n) iterate the entire string
 //space O(n) stack store all words
 
@@ -26,5 +25,4 @@ class ReverseWordsInString {
 
         return sb.toString().trim();
     }
-}
 }
