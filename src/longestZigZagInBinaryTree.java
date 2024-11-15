@@ -1,4 +1,6 @@
-public class longestZigZagInBinaryTree {
+//time O(n)
+//space O(n)
+//visit every node once for n and space n for the call stack of linkedlist like treepublic class longestZigZagInBinaryTree {
      public class TreeNode {
          int val;TreeNode left;
          TreeNode right;
@@ -33,3 +35,26 @@ public class longestZigZagInBinaryTree {
          }
      }
 }
+
+//abbreviated version with one recursive call from the parent function
+//class Solution {
+//    int max = 0;
+//    public int longestZigZag(TreeNode root) {
+//        boolean isLeft = false;
+//        dfs(root, isLeft, 0);
+//        return max;
+//    }
+//
+//    public void dfs(TreeNode root, boolean isLeft, int current) {
+//        if (root == null) return;
+//        max = Math.max(max, current);
+//        if (isLeft) {
+//            dfs(root.left, true, 1);
+//            dfs(root.right, false, current + 1);
+//        }
+//        else {
+//            dfs(root.left, true, current + 1);
+//            dfs(root.right, false, 1);
+//        }
+//    }
+//}
