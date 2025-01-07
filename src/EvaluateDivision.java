@@ -1,109 +1,70 @@
-//import java.util.HashMap;
-//import java.util.HashSet;
-//import java.util.List;
-//import java.util.Map;
-//
-//class EvaluateDivision {
-//    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-//        //build graph
-//        HashMap<String, HashMap<String, Double>> map = new HashMap<>();
-//        int index = 0;
-//        for (List<String> list : equations) {
-//            String first = list.get(0);
-//            String second = list.get(1);
-//            double value = values[index];
-//            map.putIfAbsent(first, new HashMap<>());
-//            map.putIfAbsent(second, new HashMap<>());
-//            map.get(first).put(second, value);
-//            map.get(second).put(first, 1.0 / value);
-//            index++;
-//        }
-//        //build result array
-//        double[] result = new double[queries.size()];
-//
-//        for (int i = 0; i < queries.size(); i++) {
-//            String first = queries.get(i).get(0);
-//            String second = queries.get(i).get(1);
-//            if (!map.containsKey(first) || !map.containsKey(second)) result[i] = -1;
-//            else {
-//                HashSet<String> set = new HashSet<>();
-//                double[] ans = {-1.0}; //for what?
-//                double temp = 1.0;
-//                dfs(first, second, map, set, ans, temp);
-//                result[i] = ans[0];
-//            }
-//        }
-//        return result;
-//    }
-//
-//    public void dfs(String node, String dest, HashMap<String, HashMap<String, Double>> map, HashSet<String> vis, double[] ans, double temp) {
-//        if (vis.contains(node)) return;
-//        vis.add(node);
-//        if (node.equals(dest)) {
-//            ans[0] = temp;
-//            return;
-//        }
-//
-//        for (Map.Entry<String, Double> entry : map.get(node).entrySet()) {
-//            String next = entry.getKey();
-//            double val = entry.getValue();
-//            dfs(next, dest, map, vis, ans, temp * val);
-//        }
-//    }
-//}
-//
-///*Make the graph. For every equation a=nba=nba=nb, add two edges a --n--> b and a <--1/n-- b.
-//For each query [c,d][c,d][c,d], check if such nodes even exists in the graph or not. If they don't even exist, there is no path, return -1 (Like in Example 1, x does not exists so return -1 even if we just wanted x / x).
-//If both ccc and ddd exists in the graph, traverse the graph to get a path between them, maintaining cost of path as product of weights of edges traversed. If path is found return the product, and if not, then -1.*/
+//time O(N * (V + E))
+//space O(V + E)
+//for graph creation is O(E), for dfs is O(V + E), for queriers loop is N
+
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-class EvaluateDivison {
+class EvaluateDivision {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        //edge list with values, can access from start vertex as well as the end vertex
+        //build graph
         Map<String, Map<String, Double>> map = new HashMap<>();
+        double[] result = new double[queries.size()];
+
         for (int i = 0; i < equations.size(); i++) {
+            double val = values[i];
             String start = equations.get(i).get(0);
             String end = equations.get(i).get(1);
-            map.putIfAbsent(start, new HashMap<>());
-            map.putIfAbsent(end, new HashMap<>());
-            map.get(start).put(end, values[i]);
-            map.get(end).put(start, 1/values[i]);
+            map.putIfAbsent(start, new HashMap());
+            map.get(start).put(end, val);
+            map.putIfAbsent(end, new HashMap());
+            map.get(end).put(start, 1/val);
         }
-        //create result array storing the answers
-        double[] result = new double[queries.size()];
+
         for (int i = 0; i < queries.size(); i++) {
             String start = queries.get(i).get(0);
             String end = queries.get(i).get(1);
+            double[] arr = {-1.0}; //default -1 if doesn't find
+            HashSet<String> visited = new HashSet<>();
+
+            //no such vertex, no dfs
             if (!map.containsKey(start) || !map.containsKey(end)) {
                 result[i] = -1;
                 continue;
             }
-            HashSet<String> visited = new HashSet<>();
-            //store the computed value in reference way for later reference
-            double[] value = {-1.0};
-            dfs(start, end, map, visited, value, 1.0);
-            result[i] = value[0];
+            dfs(map, start, end, visited, arr, 1.0);
+            result[i] = arr[0];
         }
         return result;
     }
 
-    public void dfs(String start, String end, Map<String, Map<String, Double>> map, HashSet<String> visited, double[] value, double temp) {
-        //check if visited
+    public void dfs(Map<String, Map<String, Double>> map, String start, String end, HashSet<String> visited, double[] arr, double current) {
+        //if visited, continue
         if (visited.contains(start)) return;
+        //notice we add the start
         visited.add(start);
+
+        //find the end vertex, return
         if (start.equals(end)) {
-            value[0] = temp;
+            arr[0] = current;
             return;
         }
-        //enhanced for loop with map.entry class
+        //on the way to find vertex, loop through the map
         for (Map.Entry<String, Double> entry : map.get(start).entrySet()) {
-            String next = entry.getKey();
-            double nextValue = entry.getValue();
-            dfs(next, end, map, visited, value, temp * nextValue);
+            String newEnd = entry.getKey();
+            double nextVal = entry.getValue();
+            //The end remains constant, while the start updates as we visit each new node, accumulating the values along the path.
+            dfs(map, newEnd, end, visited, arr, current * nextVal);
+            //notice here we always update the newEnd
         }
     }
 }
+//build the graph, map one vertex to a hashmap, and the hashmap map another vertex with value
+//go through the queies and fill in answers
+//each time use the two vertices in the query to fill in the result array
+// a/b = 2
+// b/c = 3
+// a/c = 6
