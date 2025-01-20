@@ -1,7 +1,6 @@
 //time O(nlogn)
 //space O(n)
 
-
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
