@@ -13,8 +13,8 @@ class SuccessfulPairsOfSpellsAndPotions {
             int high = potions.length - 1;
             while (low <= high) {
                 int mid = low + (high - low)/2;
-                long product = (long)potions[mid] * spell;
-                if (product < success) {
+                //cast one of the multiplicands to be long for the arithmatic operation to yield valid result
+                if ((long)potions[mid] * spell < success) {
                     low = mid + 1;
                 }
                 else high = mid - 1;
