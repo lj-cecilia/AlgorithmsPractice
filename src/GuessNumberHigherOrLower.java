@@ -1,5 +1,5 @@
 //time O(logn)
-space O(1)
+//space O(1)
 /**
  * Forward declaration of guess API.
  * @param  num   your guess
