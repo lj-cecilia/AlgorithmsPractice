@@ -45,7 +45,7 @@ class EditDistance {
         //fill in memo table
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                //if the same char at this index, then no need for extra operaitons
+                //if the same char at this index, then no need for extra operations
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     memo[i][j] = memo[i - 1][j - 1];
                 }
